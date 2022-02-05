@@ -1,5 +1,12 @@
 package main.domain;
 
+import main.Main;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class Author {
     public String email;
     public String firstName;
@@ -45,5 +52,23 @@ public class Author {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public static List<Author> readAuthors(Scanner myReader){
+        String tp;
+        List<String> tpList;
+        List<Author> authorList = new ArrayList<>();
+        while(myReader.hasNextLine()){
+            tp = myReader.nextLine();
+            tpList = Arrays.stream(tp.split(";")).toList();
+            Author newAuthor = new Author();
+            newAuthor.setEmail(tpList.get(0));
+            newAuthor.setFirstName(tpList.get(1));
+            newAuthor.setLastName(tpList.get(2));
+            authorList.add(newAuthor);
+            Main.addAuthors(newAuthor);
+        }
+
+        return authorList;
     }
 }

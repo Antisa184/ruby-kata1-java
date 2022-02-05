@@ -1,41 +1,61 @@
 package main;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
+import main.domain.Author;
+import main.domain.ReadingMaterial;
+import main.service.ReadData;
+
+import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 
+import static main.service.PrintReadingMaterial.printReadingMaterial;
+
 public class Main {
-    public static void main(String[] args){
-        String path = "data/";
-        File dir = new File(path);
-        File[] dirListing = dir.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".csv");
-            }
-        });
-        if(dirListing!=null){
-            for(File f: dirListing){
-                try {
-                    Scanner myReader = new Scanner(f);
-                    String line="";
-                    if(myReader.hasNextLine()){
-                        line= myReader.nextLine();
-                        if (line.split(";")[2]=="lastname") readAuthors(f);
-                        if (line.split(";")[3]=="description") readBooks(f);
-                        if (line.split(";")[3]=="publishedAt") readMagazines(f);
+    public static List<ReadingMaterial> readingMaterials;
+    public static List<Author> authors;
 
-                    }
-                    myReader.close();
-                } catch (FileNotFoundException e) {
-                    System.out.println("An error occurred.");
-                }
+    public static void addReadingMaterial(ReadingMaterial readable){
+        readingMaterials.add(readable);
+    }
+    public static void addAuthors(Author author){
+        authors.add(author);
+    }
 
-            }
+    public static void main(String[] args) throws IOException {
+        try {
+            ReadData.readData();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else{
-            System.out.println("No files with .csv extension in directory");
+        while(true){
+            System.out.println("Hello!\nTo choose an option write the number associated with the option and press Enter. (eg. 1)\n"
+                    +"1. Print out all books and magazines with all their details.\n"
+                    +"2. Find a book or magazine by its isbn.\n"
+                    +"3. Find all books and magazines by their authors email.\n"
+                    +"4. Print out all books and magazines with all their details sorted by title.\n"
+                    +"Type 'exit' to stop the program.\n");
+            String input;
+            Scanner in = new Scanner(System.in);
+            input = in.nextLine();
+            System.out.println("You entered string "+input);
+            if (input.equals("exit")){System.out.println("Goodbye!\n"); break;}
+            if (input.equals("1")){
+                System.out.println("kurcina");
+                printReadingMaterial(readingMaterials,1,"");
+            }
+            if (input.equals("2")){
+                System.out.println("Input the isbn: ");
+                input = in.nextLine();
+                printReadingMaterial(readingMaterials, 2, input);
+            }
+            if (input.equals("3")){
+                System.out.println("Input author's email: ");
+                input = in.nextLine();
+                printReadingMaterial(readingMaterials, 3, input);
+            }
+            if (input.equals("4")){
+                printReadingMaterial(readingMaterials,4,"");
+            }
         }
     }
 }
