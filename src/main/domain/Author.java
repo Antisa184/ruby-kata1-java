@@ -55,7 +55,6 @@ public class Author {
     }
 
     public static List<Author> readAuthors(Scanner myReader){
-        Main.test="Debela Masna kurcina.";
         String tp;
         List<String> tpList;
         List<Author> authorList = new ArrayList<>();

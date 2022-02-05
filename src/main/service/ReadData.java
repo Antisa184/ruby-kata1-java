@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ReadData {
     public static void readData() throws Exception{
-        Main.test="kurcina Masna";
+
         String path = "src/main/data";
         File dir = new File(path);
         File[] dirListing = dir.listFiles();
@@ -23,7 +23,7 @@ public class ReadData {
                     String line="";
                     if(myReader.hasNextLine()){
                         line= myReader.nextLine();
-                        //System.out.println(line.split(";")[2]+" "+line.split(";").length);
+
                         if (line.split(";").length==3 && line.split(";")[2].equals("lastname")) {Author.readAuthors(myReader);}
                         else if (line.split(";").length==4 && line.split(";")[3].equals("description")) {Book.readBooks(myReader);}
                         else if (line.split(";").length==4 && line.split(";")[3].equals("publishedAt")) {Magazine.readMagazines(myReader);}

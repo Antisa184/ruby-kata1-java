@@ -3,11 +3,14 @@ package main.domain;
 import main.Main;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Magazine extends ReadingMaterial{
     public Date publishedAt;
+    public DateFormat dtf = new SimpleDateFormat("dd.MM.yyyy");
 
     public Magazine() {
     }
@@ -28,7 +31,7 @@ public class Magazine extends ReadingMaterial{
             newMagazine.setTitle(tpList.get(0));
             newMagazine.setIsbn(tpList.get(1));
             newMagazine.setAuthors(List.of(tpList.get(2).split(",")));
-            newMagazine.setPublishedAt(new SimpleDateFormat("dd.mm.yyyy").parse(tpList.get(3)));
+            newMagazine.setPublishedAt(new SimpleDateFormat("dd.MM.yyyy").parse(tpList.get(3)));
             magazinesList.add(newMagazine);
             Main.addReadingMaterial(newMagazine);
         }
@@ -48,6 +51,6 @@ public class Magazine extends ReadingMaterial{
                 "\tTitle= " + title + '\n' +
                 "\tIsbn= " + isbn + '\n' +
                 "\tAuthors= " + authorsByName(authors) +'\n'+
-                "\tPublished at= " + publishedAt + '\n';
+                "\tPublished at= " + dtf.format(publishedAt) + '\n';
     }
 }
