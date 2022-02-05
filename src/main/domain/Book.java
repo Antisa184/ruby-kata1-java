@@ -32,7 +32,7 @@ public class Book extends ReadingMaterial{
             newBook.setAuthors(List.of(tpList.get(2).split(",")));
             newBook.setDescription(tpList.get(3));
             bookList.add(newBook);
-            Main.addReadingMaterial(newBook);
+            Main.readingMaterials.add(newBook);
         }
     }
 
@@ -46,11 +46,10 @@ public class Book extends ReadingMaterial{
 
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", authors=" + authors +
-                ", description='" + description + '\'' +
-                '}';
+        return "Book\n" +
+                "\tTitle= " + title + '\n' +
+                "\tIsbn= " + isbn + '\n' +
+                "\tAuthors= " + authorsByName(authors) +'\n'+
+                "\tDescription= " + description + '\n';
     }
 }

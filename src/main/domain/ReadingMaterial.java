@@ -1,5 +1,8 @@
 package main.domain;
 
+import main.Main;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,6 +10,16 @@ public class ReadingMaterial {
     public String title;
     public String isbn;
     public List<String> authors;
+
+    public List<String> authorsByName(List<String> authors){
+        List<String> authorNames=new ArrayList<>();
+        for(String s: authors){
+            for(Author author: Main.authors){
+                if(author.email.equals(s)) authorNames.add(author.firstName+" "+author.lastName);
+            }
+        }
+        return authorNames;
+    };
 
     public ReadingMaterial() {
     }

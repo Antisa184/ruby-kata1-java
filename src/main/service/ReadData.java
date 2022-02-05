@@ -1,5 +1,6 @@
 package main.service;
 
+import main.Main;
 import main.domain.Author;
 import main.domain.Book;
 import main.domain.Magazine;
@@ -11,13 +12,10 @@ import java.util.Scanner;
 
 public class ReadData {
     public static void readData() throws Exception{
-        String path = "data/";
+        Main.test="kurcina Masna";
+        String path = "src/main/data";
         File dir = new File(path);
-        File[] dirListing = dir.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".csv");
-            }
-        });
+        File[] dirListing = dir.listFiles();
         if(dirListing!=null){
             for(File f: dirListing){
                 try {
@@ -25,9 +23,10 @@ public class ReadData {
                     String line="";
                     if(myReader.hasNextLine()){
                         line= myReader.nextLine();
-                        if (line.split(";")[2]=="lastname") Author.readAuthors(myReader);
-                        if (line.split(";")[3]=="description") Book.readBooks(myReader);
-                        if (line.split(";")[3]=="publishedAt") Magazine.readMagazines(myReader);
+                        //System.out.println(line.split(";")[2]+" "+line.split(";").length);
+                        if (line.split(";").length==3 && line.split(";")[2].equals("lastname")) {Author.readAuthors(myReader);}
+                        else if (line.split(";").length==4 && line.split(";")[3].equals("description")) {Book.readBooks(myReader);}
+                        else if (line.split(";").length==4 && line.split(";")[3].equals("publishedAt")) {Magazine.readMagazines(myReader);}
                     }
                     myReader.close();
                 } catch (FileNotFoundException e) {

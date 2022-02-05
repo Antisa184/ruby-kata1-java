@@ -55,6 +55,7 @@ public class Author {
     }
 
     public static List<Author> readAuthors(Scanner myReader){
+        Main.test="Debela Masna kurcina.";
         String tp;
         List<String> tpList;
         List<Author> authorList = new ArrayList<>();
@@ -66,7 +67,7 @@ public class Author {
             newAuthor.setFirstName(tpList.get(1));
             newAuthor.setLastName(tpList.get(2));
             authorList.add(newAuthor);
-            Main.addAuthors(newAuthor);
+            Main.authors.add(newAuthor);
         }
 
         return authorList;

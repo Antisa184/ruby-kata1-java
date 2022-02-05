@@ -5,14 +5,16 @@ import main.domain.ReadingMaterial;
 import main.service.ReadData;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static main.service.PrintReadingMaterial.printReadingMaterial;
 
 public class Main {
-    public static List<ReadingMaterial> readingMaterials;
-    public static List<Author> authors;
+    public static List<ReadingMaterial> readingMaterials = new ArrayList<>();
+    public static List<Author> authors = new ArrayList<>();
+    public static String test;
 
     public static void addReadingMaterial(ReadingMaterial readable){
         readingMaterials.add(readable);
@@ -24,6 +26,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         try {
             ReadData.readData();
+            System.out.println(test);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -44,11 +44,10 @@ public class Magazine extends ReadingMaterial{
 
     @Override
     public String toString() {
-        return "Magazine{" +
-                "title='" + title + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", authors=" + authors +
-                ", publishedAt=" + publishedAt +
-                '}';
+        return "Magazine\n" +
+                "\tTitle= " + title + '\n' +
+                "\tIsbn= " + isbn + '\n' +
+                "\tAuthors= " + authorsByName(authors) +'\n'+
+                "\tPublished at= " + publishedAt + '\n';
     }
 }
